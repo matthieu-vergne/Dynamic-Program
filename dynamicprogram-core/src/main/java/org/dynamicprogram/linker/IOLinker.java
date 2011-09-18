@@ -1,4 +1,4 @@
-package org.dynamicprogram;
+package org.dynamicprogram.linker;
 
 /**
  * This linker allows to link an output to an input. When this linker is used,

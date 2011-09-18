@@ -1,7 +1,8 @@
-package org.dynamicprogram;
+package org.dynamicprogram.linker;
 
 import static org.junit.Assert.*;
 
+import org.dynamicprogram.linker.IOLinker;
 import org.junit.Test;
 
 public class IOLinkerTest {
