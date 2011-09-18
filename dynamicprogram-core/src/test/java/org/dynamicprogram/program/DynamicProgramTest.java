@@ -6,8 +6,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 
-import org.dynamicprogram.program.DynamicProgram;
-import org.dynamicprogram.program.Program;
 import org.junit.Test;
 
 public class DynamicProgramTest {
@@ -24,7 +22,7 @@ public class DynamicProgramTest {
 
 		// define root program
 		final SubProgram subProgram = new SubProgram();
-		class ProgramRoot extends DynamicProgram {
+		class ProgramRoot extends DynamicProgram<SubProgram> {
 			private SubProgram p1 = subProgram;
 			private SubProgram p2 = new SubProgram();
 
@@ -35,11 +33,12 @@ public class DynamicProgramTest {
 			}
 
 			@Override
-			public Collection<? extends Program> getUpdatableParts() {
+			public Collection<SubProgram> getUpdatableIDs() {
 				return Arrays.asList(p1);
 			}
 
-			public <DP extends Program> void replace(DP current, DP replacement) {
+			@Override
+			public <DP extends Program> void setPart(SubProgram current, DP replacement) {
 				if (p1 == current) {
 					p1 = (SubProgram) replacement;
 				}
@@ -52,15 +51,15 @@ public class DynamicProgramTest {
 
 		Collection<Program> subprograms = new HashSet<Program>();
 		subprograms.add(subProgram);
-		assertTrue(program.getUpdatableParts().containsAll(subprograms));
-		assertTrue(subprograms.containsAll(program.getUpdatableParts()));
+		assertTrue(program.getUpdatableIDs().containsAll(subprograms));
+		assertTrue(subprograms.containsAll(program.getUpdatableIDs()));
 
 		SubProgram program1B = new SubProgram();
-		program.replace(subProgram, program1B);
+		program.setPart(subProgram, program1B);
 		subprograms.clear();
 		subprograms.add(program1B);
-		assertTrue(program.getUpdatableParts().containsAll(subprograms));
-		assertTrue(subprograms.containsAll(program.getUpdatableParts()));
+		assertTrue(program.getUpdatableIDs().containsAll(subprograms));
+		assertTrue(subprograms.containsAll(program.getUpdatableIDs()));
 	}
 
 }

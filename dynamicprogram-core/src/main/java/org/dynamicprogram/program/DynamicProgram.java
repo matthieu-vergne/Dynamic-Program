@@ -9,37 +9,35 @@ import java.util.Collection;
  * 
  * @author Matthieu Vergne <matthieu.vergne@gmail.com>
  * 
+ * @param <ID>
+ *            The type of IDs used to identify the updatable parts. Anything can
+ *            be used (enum, integers, objects, etc.). It is possible to use the
+ *            parts themselves if you do not want to create specific IDs.
  */
-// TODO manage I/O
-public abstract class DynamicProgram extends Program {
+public abstract class DynamicProgram<ID> extends Program {
 
 	/**
-	 * This method should return all the parts which can be updated.
+	 * This method should return all the IDs identifying updatable parts.
 	 * 
-	 * @return the parts which can be updated
+	 * @return the IDs of the parts which can be updated
 	 */
-	public abstract Collection<? extends Program> getUpdatableParts();
+	public abstract Collection<ID> getUpdatableIDs();
 
 	/**
 	 * 
 	 * @return true if there is updatable parts, false otherwise
 	 */
 	public boolean hasUpdatableParts() {
-		return !getUpdatableParts().isEmpty();
+		return !getUpdatableIDs().isEmpty();
 	}
 
 	/**
-	 * This method should implement a way to replace an updatable part by
-	 * another part. A constraint is given on the type of the part : you cannot
-	 * replace a part by a completely different one, they have to be from the
-	 * same class. If you need to allow several classes for the same part, you
-	 * need a common parent class. Then you can use this method casting both
-	 * parts with the parent class.
+	 * This method should implement a way to set an updatable part.
 	 * 
-	 * @param current
-	 *            the part to replace
-	 * @param replacement
-	 *            the new part
+	 * @param id
+	 *            the ID of the part to set
+	 * @param program
+	 *            the program to use for this part
 	 */
-	public abstract <DP extends Program> void replace(DP current, DP replacement);
+	public abstract <DP extends Program> void setPart(ID id, DP program);
 }
