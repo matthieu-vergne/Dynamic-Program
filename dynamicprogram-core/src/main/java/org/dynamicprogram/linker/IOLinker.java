@@ -1,36 +1,73 @@
 package org.dynamicprogram.linker;
 
+import org.dynamicprogram.data.DataManager;
+import org.dynamicprogram.program.InputableProgram;
+import org.dynamicprogram.program.OutputableProgram;
+import org.dynamicprogram.program.Program;
+
 /**
- * This linker allows to link an output to an input. When this linker is used,
- * the data of the registered output is send to the registered input.
+ * This linker allows to link an output from a {@link OutputableProgram} to an
+ * input from an {@link InputableProgram}. When this linker is executed, the
+ * data of the registered output is send to the registered input.
  * 
  * @author Matthieu Vergne <matthieu.vergne@gmail.com>
  * 
- * @param <Data>
- *            The type of data to manage.
  */
 // TODO create builder for composed programs
-public abstract class IOLinker<Data> {
+public class IOLinker {
+	/**
+	 * The source of the data.
+	 */
+	private Wrapper source;
+	/**
+	 * The target of the data.
+	 */
+	private Wrapper target;
 
 	/**
-	 * This method should implement a way to get the needed data from a source.
+	 * Register the source output.
 	 * 
-	 * @return the data
+	 * @param program
+	 *            the source program
+	 * @param id
+	 *            the ID of the output to use
 	 */
-	public abstract Data getOutput();
+	public <OutputID> void setSource(OutputableProgram<?, OutputID> program,
+			OutputID id) {
+		source = new Wrapper();
+		source.program = program;
+		source.id = id;
+	}
 
 	/**
-	 * This method should implement a way to put the given data in a target.
+	 * Register the target input.
 	 * 
-	 * @param data
-	 *            the data
+	 * @param program
+	 *            the target program
+	 * @param id
+	 *            the ID of the input to use
 	 */
-	public abstract void setInput(Data data);
+	public <InputID> void setTarget(InputableProgram<?, InputID> program,
+			InputID id) {
+		target = new Wrapper();
+		target.program = program;
+		target.id = id;
+	}
 
 	/**
-	 * Transfer the data from the given output to the given input.
+	 * Transfer the data from the registered source to the registered target.
 	 */
+	@SuppressWarnings("unchecked")
 	public void link() {
-		setInput(getOutput());
+		DataManager<Object, Object> inputManager = ((InputableProgram<Object, Object>) target.program)
+				.getInputManager();
+		DataManager<Object, Object> outputManager = ((OutputableProgram<Object, Object>) source.program)
+				.getOutputManager();
+		inputManager.setData(target.id, outputManager.getData(source.id));
+	}
+
+	private class Wrapper {
+		Program program;
+		Object id;
 	}
 }
