@@ -16,8 +16,10 @@ import org.dynamicprogram.data.DataManager;
 public interface OutputableProgram<Output, ID> extends Program {
 
 	/**
+	 * This method should implement a way to read the asked output of this
+	 * program. This can be done easily via a {@link DataManager}.
 	 * 
 	 * @return the manager of the outputs
 	 */
-	public DataManager<Output, ID> getOutputManager();
+	public Output getOutput(ID id);
 }

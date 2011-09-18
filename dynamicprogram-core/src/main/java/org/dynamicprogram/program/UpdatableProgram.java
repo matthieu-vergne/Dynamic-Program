@@ -15,8 +15,23 @@ import org.dynamicprogram.data.DataManager;
 public interface UpdatableProgram<ID> extends Program {
 
 	/**
+	 * This method should implement a way to update the asked subprogram. This
+	 * can be done easily via a {@link DataManager}.
 	 * 
-	 * @return the manager of the updatable subprograms
+	 * @param id
+	 *            the Id of the subprogram
+	 * @param program
+	 *            the program to use
 	 */
-	public DataManager<Program, ID> getSubprogramManager();
+	public void setSubprogram(ID id, Program program);
+
+	/**
+	 * This method should implement a way to get the asked subprogram. This can
+	 * be done easily via a {@link DataManager}.
+	 * 
+	 * @param id
+	 *            the id of the subprogram
+	 * @return the subprogram
+	 */
+	public Program getSubprogram(ID id);
 }

@@ -1,9 +1,7 @@
 package org.dynamicprogram.linker;
 
-import org.dynamicprogram.data.DataManager;
 import org.dynamicprogram.program.InputableProgram;
 import org.dynamicprogram.program.OutputableProgram;
-import org.dynamicprogram.program.Program;
 
 /**
  * This linker allows to link an output from a {@link OutputableProgram} to an
@@ -18,11 +16,19 @@ public class IOLinker {
 	/**
 	 * The source of the data.
 	 */
-	private Wrapper source;
+	private OutputableProgram<Object, Object> out;
+	/**
+	 * The source ID of the data.
+	 */
+	private Object outId;
 	/**
 	 * The target of the data.
 	 */
-	private Wrapper target;
+	private InputableProgram<Object, Object> in;
+	/**
+	 * The target ID of the data.
+	 */
+	private Object inId;
 
 	/**
 	 * Register the source output.
@@ -32,11 +38,11 @@ public class IOLinker {
 	 * @param id
 	 *            the ID of the output to use
 	 */
+	@SuppressWarnings("unchecked")
 	public <OutputID> void setSource(OutputableProgram<?, OutputID> program,
 			OutputID id) {
-		source = new Wrapper();
-		source.program = program;
-		source.id = id;
+		out = (OutputableProgram<Object, Object>) program;
+		outId = id;
 	}
 
 	/**
@@ -47,27 +53,17 @@ public class IOLinker {
 	 * @param id
 	 *            the ID of the input to use
 	 */
+	@SuppressWarnings("unchecked")
 	public <InputID> void setTarget(InputableProgram<?, InputID> program,
 			InputID id) {
-		target = new Wrapper();
-		target.program = program;
-		target.id = id;
+		in = (InputableProgram<Object, Object>) program;
+		inId = id;
 	}
 
 	/**
 	 * Transfer the data from the registered source to the registered target.
 	 */
-	@SuppressWarnings("unchecked")
 	public void link() {
-		DataManager<Object, Object> inputManager = ((InputableProgram<Object, Object>) target.program)
-				.getInputManager();
-		DataManager<Object, Object> outputManager = ((OutputableProgram<Object, Object>) source.program)
-				.getOutputManager();
-		inputManager.setData(target.id, outputManager.getData(source.id));
-	}
-
-	private class Wrapper {
-		Program program;
-		Object id;
+		in.setInput(inId, out.getOutput(outId));
 	}
 }

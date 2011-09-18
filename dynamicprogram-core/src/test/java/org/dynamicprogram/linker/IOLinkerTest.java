@@ -2,11 +2,6 @@ package org.dynamicprogram.linker;
 
 import static org.junit.Assert.*;
 
-import java.util.Arrays;
-import java.util.Collection;
-
-import org.dynamicprogram.data.AbstractDataManager;
-import org.dynamicprogram.data.DataManager;
 import org.dynamicprogram.program.InputableProgram;
 import org.dynamicprogram.program.OutputableProgram;
 import org.junit.Test;
@@ -17,66 +12,32 @@ public class IOLinkerTest {
 	public void testLink() {
 		class Source implements OutputableProgram<String, Integer> {
 
-			private DataManager<String, Integer> outputManager = new AbstractDataManager<String, Integer>() {
-				private final String[] outputs = new String[] { null, null };
-
-				@Override
-				public Collection<Integer> getDataIDs() {
-					return Arrays.asList(0, 1);
-				}
-
-				@Override
-				public String getData(Integer id) {
-					return outputs[id];
-				}
-
-				@Override
-				protected void internalSetPart(Integer id, String data) {
-					outputs[id] = data;
-				}
-			};
-
-			@Override
-			public DataManager<String, Integer> getOutputManager() {
-				return outputManager;
-			}
+			public final String[] outputs = new String[] { null, null };
 
 			@Override
 			public void execute() {
 				// nothing to do
+			}
+
+			@Override
+			public String getOutput(Integer id) {
+				return outputs[id];
 			}
 
 		}
 
 		class Target implements InputableProgram<String, Integer> {
 
-			private DataManager<String, Integer> inputManager = new AbstractDataManager<String, Integer>() {
-				private final String[] inputs = new String[] { null };
-
-				@Override
-				public Collection<Integer> getDataIDs() {
-					return Arrays.asList(0);
-				}
-
-				@Override
-				public String getData(Integer id) {
-					return inputs[id];
-				}
-
-				@Override
-				protected void internalSetPart(Integer id, String data) {
-					inputs[id] = data;
-				}
-			};
-
-			@Override
-			public DataManager<String, Integer> getInputManager() {
-				return inputManager;
-			}
+			public final String[] inputs = new String[] { null };
 
 			@Override
 			public void execute() {
 				// nothing to do
+			}
+
+			@Override
+			public void setInput(Integer id, String data) {
+				inputs[id] = data;
 			}
 
 		}
@@ -88,29 +49,29 @@ public class IOLinkerTest {
 		linker.setTarget(target, 0);
 
 		String data = "test";
-		source.getOutputManager().setData(0, data);
+		source.outputs[0] = data;
 		linker.link();
-		assertEquals(data, target.getInputManager().getData(0));
+		assertEquals(data, target.inputs[0]);
 
 		data = "test 2";
-		source.getOutputManager().setData(0, data);
+		source.outputs[0] = data;
 		linker.link();
-		assertEquals(data, target.getInputManager().getData(0));
+		assertEquals(data, target.inputs[0]);
 
 		data = null;
-		source.getOutputManager().setData(0, data);
+		source.outputs[0] = data;
 		linker.link();
-		assertEquals(data, target.getInputManager().getData(0));
+		assertEquals(data, target.inputs[0]);
 
 		data = "test 3";
-		source.getOutputManager().setData(1, data);
+		source.outputs[1] = data;
 		linker.setSource(source, 1);
 		linker.link();
-		assertEquals(data, target.getInputManager().getData(0));
+		assertEquals(data, target.inputs[0]);
 
 		data = "test 4";
-		source.getOutputManager().setData(1, data);
+		source.outputs[1] = data;
 		linker.link();
-		assertEquals(data, target.getInputManager().getData(0));
+		assertEquals(data, target.inputs[0]);
 	}
 }

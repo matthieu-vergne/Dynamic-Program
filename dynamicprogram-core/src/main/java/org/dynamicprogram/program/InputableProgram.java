@@ -16,8 +16,10 @@ import org.dynamicprogram.data.DataManager;
 public interface InputableProgram<Input, ID> extends Program {
 
 	/**
+	 * This method should implement a way to write the asked input of this
+	 * program. This can be done easily via a {@link DataManager}.
 	 * 
 	 * @return the manager of the inputs
 	 */
-	public DataManager<Input, ID> getInputManager();
+	public void setInput(ID id, Input data);
 }
