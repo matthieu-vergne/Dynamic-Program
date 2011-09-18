@@ -1,6 +1,6 @@
 package org.dynamicprogram.update;
 
-import org.dynamicprogram.program.AbstractProgram;
+import org.dynamicprogram.program.Program;
 
 /**
  * The update listener is a way to be advertised of part updates in
@@ -17,9 +17,12 @@ public interface UpdateListener<ID> {
 
 	/**
 	 * 
-	 * @param id the ID of the updated part
-	 * @param oldPart the old part
-	 * @param newPart the new part
+	 * @param id
+	 *            the ID of the updated part
+	 * @param oldPart
+	 *            the old part
+	 * @param newPart
+	 *            the new part
 	 */
-	public void partUpdated(ID id, AbstractProgram oldPart, AbstractProgram newPart);
+	public void partUpdated(ID id, Program oldPart, Program newPart);
 }

@@ -2,7 +2,7 @@ package org.dynamicprogram.update;
 
 import java.util.Collection;
 
-import org.dynamicprogram.program.AbstractProgram;
+import org.dynamicprogram.program.Program;
 
 /**
  * Updatable parts are identified programs which can be dynamically replaced.
@@ -31,7 +31,7 @@ public interface UpdatableParts<ID> {
 	 * @param program
 	 *            the program to use for this part
 	 */
-	public <DP extends AbstractProgram> void setPart(ID id, DP program);
+	public void setPart(ID id, Program program);
 
 	/**
 	 * This method should implement a way to get the part corresponding to the
@@ -41,5 +41,5 @@ public interface UpdatableParts<ID> {
 	 *            the ID of the part
 	 * @return the identified part
 	 */
-	public <DP extends AbstractProgram> DP getPart(ID id);
+	public Program getPart(ID id);
 }

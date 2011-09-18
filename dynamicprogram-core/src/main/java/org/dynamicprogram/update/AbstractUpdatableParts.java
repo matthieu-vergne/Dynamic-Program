@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 import org.dynamicprogram.program.AbstractProgram;
+import org.dynamicprogram.program.Program;
 
 /**
  * This abstract class implements some convenient features for a
@@ -27,10 +28,10 @@ public abstract class AbstractUpdatableParts<ID> implements UpdatableParts<ID> {
 	 * {@link UpdateListener} via {@link #addUpdateListener(UpdateListener)}.
 	 */
 	@Override
-	public <DP extends AbstractProgram> void setPart(ID id, DP program) {
-		AbstractProgram oldPart = getPart(id);
-		replacePart(id, program);
-		AbstractProgram newPart = getPart(id);
+	public void setPart(ID id, Program program) {
+		Program oldPart = getPart(id);
+		internalSetPart(id, program);
+		Program newPart = getPart(id);
 		for (UpdateListener<ID> listener : getUpdateListeners()) {
 			listener.partUpdated(id, oldPart, newPart);
 		}
@@ -46,8 +47,7 @@ public abstract class AbstractUpdatableParts<ID> implements UpdatableParts<ID> {
 	 * @param newPart
 	 *            the new part
 	 */
-	protected abstract <DP extends AbstractProgram> void replacePart(ID id,
-			DP newPart);
+	protected abstract void internalSetPart(ID id, Program program);
 
 	/**
 	 * 
