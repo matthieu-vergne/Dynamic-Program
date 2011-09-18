@@ -10,7 +10,6 @@ import java.util.HashSet;
  * @author Matthieu Vergne <matthieu.vergne@gmail.com>
  * 
  */
-// TODO manage I/O
 public abstract class AbstractProgram implements Program {
 	/**
 	 * The registered execution listeners.
