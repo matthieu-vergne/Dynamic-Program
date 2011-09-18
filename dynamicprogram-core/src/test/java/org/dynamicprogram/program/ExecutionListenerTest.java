@@ -1,10 +1,11 @@
-package org.dynamicprogram;
+package org.dynamicprogram.program;
 
 import static org.junit.Assert.*;
 
 import java.util.Arrays;
-import java.util.Collection;
 
+import org.dynamicprogram.program.ExecutionListener;
+import org.dynamicprogram.program.Program;
 import org.junit.Test;
 
 public class ExecutionListenerTest {
@@ -26,7 +27,7 @@ public class ExecutionListenerTest {
 				steps[2] = true;
 			}
 		};
-		DynamicProgram program = new DynamicProgram() {
+		Program program = new Program() {
 
 			@Override
 			protected void process() {
@@ -34,10 +35,6 @@ public class ExecutionListenerTest {
 				steps[1] = true;
 			}
 
-			@Override
-			public Collection<? extends DynamicProgram> getUpdatableParts() {
-				return null;
-			}
 		};
 		program.addExecutionListener(listener);
 

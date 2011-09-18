@@ -1,8 +1,8 @@
-package org.dynamicprogram;
+package org.dynamicprogram.program;
 
 /**
  * This listener allows to execute some operations just before/after the
- * execution of a program.
+ * execution of a {@link Program}.
  * 
  * @author Matthieu Vergne <matthieu.vergne@gmail.com>
  * 
