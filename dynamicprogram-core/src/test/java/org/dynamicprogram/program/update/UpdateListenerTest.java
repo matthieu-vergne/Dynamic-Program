@@ -1,4 +1,4 @@
-package org.dynamicprogram.data;
+package org.dynamicprogram.program.update;
 
 public class UpdateListenerTest {
 

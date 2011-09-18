@@ -1,7 +1,7 @@
 package org.dynamicprogram.linker;
 
-import org.dynamicprogram.program.InputableProgram;
-import org.dynamicprogram.program.OutputableProgram;
+import org.dynamicprogram.program.input.InputableProgram;
+import org.dynamicprogram.program.output.OutputableProgram;
 
 /**
  * This linker allows to link an output from a {@link OutputableProgram} to an

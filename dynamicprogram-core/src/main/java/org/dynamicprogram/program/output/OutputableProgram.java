@@ -1,6 +1,6 @@
-package org.dynamicprogram.program;
+package org.dynamicprogram.program.output;
 
-import org.dynamicprogram.data.DataManager;
+import org.dynamicprogram.program.Program;
 
 /**
  * An outputable program is a program giving specific outputs.
@@ -17,7 +17,7 @@ public interface OutputableProgram<Output, ID> extends Program {
 
 	/**
 	 * This method should implement a way to read the asked output of this
-	 * program. This can be done easily via a {@link DataManager}.
+	 * program.
 	 * 
 	 * @return the manager of the outputs
 	 */

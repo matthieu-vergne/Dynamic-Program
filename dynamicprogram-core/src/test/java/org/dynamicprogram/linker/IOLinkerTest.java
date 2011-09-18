@@ -2,8 +2,8 @@ package org.dynamicprogram.linker;
 
 import static org.junit.Assert.*;
 
-import org.dynamicprogram.program.InputableProgram;
-import org.dynamicprogram.program.OutputableProgram;
+import org.dynamicprogram.program.input.InputableProgram;
+import org.dynamicprogram.program.output.OutputableProgram;
 import org.junit.Test;
 
 public class IOLinkerTest {

@@ -1,4 +1,4 @@
-package org.dynamicprogram.program;
+package org.dynamicprogram.program.input;
 
 public class InputableProgramTest {
 

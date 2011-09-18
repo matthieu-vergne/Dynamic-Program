@@ -1,6 +1,6 @@
-package org.dynamicprogram.program;
+package org.dynamicprogram.program.input;
 
-import org.dynamicprogram.data.DataManager;
+import org.dynamicprogram.program.Program;
 
 /**
  * An inputable program is a program asking for specific inputs.
@@ -17,7 +17,7 @@ public interface InputableProgram<Input, ID> extends Program {
 
 	/**
 	 * This method should implement a way to write the asked input of this
-	 * program. This can be done easily via a {@link DataManager}.
+	 * program.
 	 * 
 	 * @return the manager of the inputs
 	 */

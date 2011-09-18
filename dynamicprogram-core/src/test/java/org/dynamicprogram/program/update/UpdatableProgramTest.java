@@ -1,4 +1,4 @@
-package org.dynamicprogram.program;
+package org.dynamicprogram.program.update;
 
 public class UpdatableProgramTest {
 

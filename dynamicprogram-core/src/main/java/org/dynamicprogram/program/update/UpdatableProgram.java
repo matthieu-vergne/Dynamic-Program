@@ -1,6 +1,6 @@
-package org.dynamicprogram.program;
+package org.dynamicprogram.program.update;
 
-import org.dynamicprogram.data.DataManager;
+import org.dynamicprogram.program.Program;
 
 /**
  * An updatable program is a program where some parts can be dynamically
@@ -15,8 +15,7 @@ import org.dynamicprogram.data.DataManager;
 public interface UpdatableProgram<ID> extends Program {
 
 	/**
-	 * This method should implement a way to update the asked subprogram. This
-	 * can be done easily via a {@link DataManager}.
+	 * This method should implement a way to update the asked subprogram.
 	 * 
 	 * @param id
 	 *            the Id of the subprogram
@@ -26,8 +25,7 @@ public interface UpdatableProgram<ID> extends Program {
 	public void setSubprogram(ID id, Program program);
 
 	/**
-	 * This method should implement a way to get the asked subprogram. This can
-	 * be done easily via a {@link DataManager}.
+	 * This method should implement a way to get the asked subprogram.
 	 * 
 	 * @param id
 	 *            the id of the subprogram
