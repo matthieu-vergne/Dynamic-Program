@@ -1,11 +1,11 @@
-package org.dynamicprogram.program;
+package org.dynamicprogram.update;
 
 import java.util.Collection;
 
+import org.dynamicprogram.program.Program;
+
 /**
- * A dynamic program is a program where several parts can be dynamically
- * modified. Each part of a dynamic program is a program itself, meaning you can
- * compose programs.
+ * Updatable parts are identified programs which can be dynamically replaced.
  * 
  * @author Matthieu Vergne <matthieu.vergne@gmail.com>
  * 
@@ -14,22 +14,14 @@ import java.util.Collection;
  *            be used (enum, integers, objects, etc.). It is possible to use the
  *            parts themselves if you do not want to create specific IDs.
  */
-public abstract class DynamicProgram<ID> extends Program {
+public interface UpdatableParts<ID> {
 
 	/**
-	 * This method should return all the IDs identifying updatable parts.
+	 * This method should return all the IDs updatable parts.
 	 * 
 	 * @return the IDs of the parts which can be updated
 	 */
-	public abstract Collection<ID> getUpdatableIDs();
-
-	/**
-	 * 
-	 * @return true if there is updatable parts, false otherwise
-	 */
-	public boolean hasUpdatableParts() {
-		return !getUpdatableIDs().isEmpty();
-	}
+	public Collection<ID> getPartIDs();
 
 	/**
 	 * This method should implement a way to set an updatable part.
@@ -39,5 +31,15 @@ public abstract class DynamicProgram<ID> extends Program {
 	 * @param program
 	 *            the program to use for this part
 	 */
-	public abstract <DP extends Program> void setPart(ID id, DP program);
+	public <DP extends Program> void setPart(ID id, DP program);
+
+	/**
+	 * This method should implement a way to get the part corresponding to the
+	 * given ID.
+	 * 
+	 * @param id
+	 *            the ID of the part
+	 * @return the identified part
+	 */
+	public <DP extends Program> DP getPart(ID id);
 }
