@@ -12,9 +12,9 @@ public class ProgramTest {
 	public void testExecution() {
 		// define root program
 		final Boolean executed[] = new Boolean[] { false };
-		class ProgramRoot extends Program {
+		class ProgramRoot extends AbstractProgram {
 			@Override
-			protected void process() {
+			protected void internalExecute() {
 				executed[0] = true;
 			}
 

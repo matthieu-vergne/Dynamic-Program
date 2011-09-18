@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import java.util.Arrays;
 
 import org.dynamicprogram.program.ExecutionListener;
-import org.dynamicprogram.program.Program;
+import org.dynamicprogram.program.AbstractProgram;
 import org.junit.Test;
 
 public class ExecutionListenerTest {
@@ -27,10 +27,10 @@ public class ExecutionListenerTest {
 				steps[2] = true;
 			}
 		};
-		Program program = new Program() {
+		AbstractProgram program = new AbstractProgram() {
 
 			@Override
-			protected void process() {
+			protected void internalExecute() {
 				assertArrayEquals(new Boolean[] { true, false, false }, steps);
 				steps[1] = true;
 			}
