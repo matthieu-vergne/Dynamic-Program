@@ -3,6 +3,13 @@ package org.dynamicprogram.program;
 import java.util.Collection;
 import java.util.HashSet;
 
+/**
+ * A program is an instance able to execute a process.
+ * 
+ * @author Matthieu Vergne <matthieu.vergne@gmail.com>
+ * 
+ */
+// TODO manage I/O
 public abstract class Program {
 	/**
 	 * The registered execution listeners.
