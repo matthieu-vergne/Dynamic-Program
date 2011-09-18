@@ -3,6 +3,7 @@ package org.dynamicprogram;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Collection;
+import java.util.HashSet;
 
 /**
  * A dynamic program is a program where several (possibly all) parts can be
@@ -13,10 +14,14 @@ import java.util.Collection;
  * 
  */
 // TODO manage I/O
-// TODO manage listeners (at least for execution)
 // TODO manage parts in collections
 // TODO update the javadoc to give the constraints to make a part updatable
 public abstract class DynamicProgram {
+
+	/**
+	 * The registered execution listeners.
+	 */
+	Collection<ExecutionListener> executionListeners = new HashSet<ExecutionListener>();
 
 	/**
 	 * This method should implement the program to execute, using the different
@@ -26,10 +31,38 @@ public abstract class DynamicProgram {
 	protected abstract void process();
 
 	/**
-	 * Execute this program.
+	 * Execute this program. You can be advertised to the execution registering
+	 * an {@link ExecutionListener} via
+	 * {@link #addExecutionListener(ExecutionListener)}.
 	 */
 	public void execute() {
+		for (ExecutionListener listener : executionListeners) {
+			listener.preExecution();
+		}
 		process();
+		for (ExecutionListener listener : executionListeners) {
+			listener.postExecution();
+		}
+	}
+
+	/**
+	 * Register a listener on the execution steps.
+	 * 
+	 * @param listener
+	 *            the listener to register
+	 */
+	public void addExecutionListener(ExecutionListener listener) {
+		executionListeners.add(listener);
+	}
+
+	/**
+	 * Unregister a listener on the execution steps.
+	 * 
+	 * @param listener
+	 *            the listener to unregister
+	 */
+	public void removeExecutionListener(ExecutionListener listener) {
+		executionListeners.remove(listener);
 	}
 
 	/**
