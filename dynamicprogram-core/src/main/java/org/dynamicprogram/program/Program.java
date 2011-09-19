@@ -4,6 +4,7 @@ import org.dynamicprogram.program.input.AbstractInputableProgram;
 import org.dynamicprogram.program.input.InputableProgram;
 import org.dynamicprogram.program.output.AbstractOutputableProgram;
 import org.dynamicprogram.program.output.OutputableProgram;
+import org.dynamicprogram.program.update.AbstractUpdatableProgram;
 import org.dynamicprogram.program.update.UpdatableProgram;
 
 /**
@@ -12,12 +13,12 @@ import org.dynamicprogram.program.update.UpdatableProgram;
  * improve a program management implementing {@link InputableProgram},
  * {@link OutputableProgram} and {@link UpdatableProgram}. For these last cases,
  * you can also extend their abstract classes {@link AbstractInputableProgram},
- * {@link AbstractOutputableProgram} or abstract {@link UpdatableProgram}, but
- * only once as you cannot extends several classes in Java. In order to use all
- * the possibilities of several of these abstract classes (basic implementation,
- * listeners, etc.), you can just implements the corresponding interfaces and
- * use an instance of each needed abstract class to implement the corresponding
- * methods.
+ * {@link AbstractOutputableProgram} or {@link AbstractUpdatableProgram}, but
+ * only one of them as you cannot extends several classes in Java. In order to
+ * use all the possibilities of several of these abstract classes (basic
+ * implementation, listeners, etc.), you can just implement the corresponding
+ * interfaces and use an instance of each needed abstract class to implement the
+ * corresponding methods.
  * 
  * @author Matthieu Vergne <matthieu.vergne@gmail.com>
  * 
