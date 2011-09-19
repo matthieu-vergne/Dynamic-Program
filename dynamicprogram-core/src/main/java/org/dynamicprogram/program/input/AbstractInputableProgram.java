@@ -32,14 +32,6 @@ public abstract class AbstractInputableProgram<Input, ID> implements
 	private final Collection<InputListener<Input, ID>> listeners = new HashSet<InputListener<Input, ID>>();
 
 	/**
-	 * This method should give all the IDs which can identify an input of this
-	 * program.
-	 * 
-	 * @return the possible IDs for the inputs.
-	 */
-	public abstract Collection<ID> getInputIDs();
-
-	/**
 	 * Modify the asked input. This operation generate a {@link InputListener}
 	 * event.
 	 */

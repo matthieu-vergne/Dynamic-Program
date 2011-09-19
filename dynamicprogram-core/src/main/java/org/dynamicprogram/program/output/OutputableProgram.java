@@ -1,5 +1,7 @@
 package org.dynamicprogram.program.output;
 
+import java.util.Collection;
+
 import org.dynamicprogram.program.Program;
 
 /**
@@ -14,6 +16,14 @@ import org.dynamicprogram.program.Program;
  *            The kind of outputs managed.
  */
 public interface OutputableProgram<Output, ID> extends Program {
+
+	/**
+	 * This method should give all the IDs which can identify an output of this
+	 * program.
+	 * 
+	 * @return the possible IDs for the outputs
+	 */
+	public abstract Collection<ID> getOutputIDs();
 
 	/**
 	 * This method should implement a way to read the asked output of this

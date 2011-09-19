@@ -1,5 +1,7 @@
 package org.dynamicprogram.program.input;
 
+import java.util.Collection;
+
 import org.dynamicprogram.program.Program;
 
 /**
@@ -14,6 +16,14 @@ import org.dynamicprogram.program.Program;
  *            The kind of inputs managed.
  */
 public interface InputableProgram<Input, ID> extends Program {
+
+	/**
+	 * This method should give all the IDs which can identify an input of this
+	 * program.
+	 * 
+	 * @return the possible IDs for the inputs.
+	 */
+	public abstract Collection<ID> getInputIDs();
 
 	/**
 	 * This method should implement a way to write the asked input of this

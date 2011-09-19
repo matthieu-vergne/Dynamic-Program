@@ -2,6 +2,9 @@ package org.dynamicprogram.linker;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+import java.util.Collection;
+
 import org.dynamicprogram.program.input.InputableProgram;
 import org.dynamicprogram.program.output.OutputableProgram;
 import org.junit.Test;
@@ -18,6 +21,11 @@ public class IOLinkerTest {
 			public void execute() {
 				// nothing to do
 			}
+			
+			@Override
+			public Collection<Integer> getOutputIDs() {
+				return Arrays.asList(0, 1);
+			}
 
 			@Override
 			public String getOutput(Integer id) {
@@ -33,6 +41,11 @@ public class IOLinkerTest {
 			@Override
 			public void execute() {
 				// nothing to do
+			}
+			
+			@Override
+			public Collection<Integer> getInputIDs() {
+				return Arrays.asList(0);
 			}
 
 			@Override

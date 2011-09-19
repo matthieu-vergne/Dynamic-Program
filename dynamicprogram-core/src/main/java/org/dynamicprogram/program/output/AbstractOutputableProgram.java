@@ -32,14 +32,6 @@ public abstract class AbstractOutputableProgram<Output, ID> implements
 	private final Collection<OutputListener<Output, ID>> listeners = new HashSet<OutputListener<Output, ID>>();
 
 	/**
-	 * This method should give all the IDs which can identify an output of this
-	 * program.
-	 * 
-	 * @return the possible IDs for the outputs
-	 */
-	public abstract Collection<ID> getOutputIDs();
-
-	/**
 	 * Modify the asked output. This operation generate a {@link OutputListener}
 	 * event.
 	 * 

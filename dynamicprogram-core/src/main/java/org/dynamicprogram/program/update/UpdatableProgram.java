@@ -1,5 +1,7 @@
 package org.dynamicprogram.program.update;
 
+import java.util.Collection;
+
 import org.dynamicprogram.program.Program;
 
 /**
@@ -13,6 +15,14 @@ import org.dynamicprogram.program.Program;
  *            subprograms.
  */
 public interface UpdatableProgram<ID> extends Program {
+
+	/**
+	 * This method should give all the IDs which can identify a subprogram of
+	 * this program.
+	 * 
+	 * @return the possible IDs for the subprograms
+	 */
+	public abstract Collection<ID> getSubprogramIDs();
 
 	/**
 	 * This method should implement a way to update the asked subprogram.

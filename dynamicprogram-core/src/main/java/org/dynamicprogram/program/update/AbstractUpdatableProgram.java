@@ -31,14 +31,6 @@ public abstract class AbstractUpdatableProgram<ID> implements
 	private final Collection<ProgramUpdateListener<ID>> listeners = new HashSet<ProgramUpdateListener<ID>>();
 
 	/**
-	 * This method should give all the IDs which can identify a subprogram of
-	 * this program.
-	 * 
-	 * @return the possible IDs for the subprograms
-	 */
-	public abstract Collection<ID> getSubprogramIDs();
-
-	/**
 	 * Modify the asked program. This operation generate a
 	 * {@link ProgramUpdateListener} event.
 	 * 
